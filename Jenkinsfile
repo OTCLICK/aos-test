@@ -12,7 +12,14 @@ pipeline {
             }
         }
 
-        stage('Build') {
+        tage('Build Contracts') {
+            steps {
+                sh 'cd events-contract && mvn clean install -DskipTests'
+                sh 'cd books-api-contract && mvn clean install -DskipTests'
+            }
+        }
+
+        stage('Build Services') {
             steps {
                 sh 'cd demo-rest && mvn clean package -DskipTests'
                 sh 'cd analytics-service && mvn clean package -DskipTests'
